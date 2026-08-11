@@ -3,161 +3,78 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>我是医生｜我的十年</title>
+  <title>我是医生｜我的医路</title>
   <style>
-    :root { --ink:#603920; --brown:#8a5635; --paper:#fbf7ef; --line:#ddaa7d; --soft:#f2e4d1; }
-    * { box-sizing:border-box; }
-    body { margin:0; background:linear-gradient(135deg,#f4ebdf,#e9dbc9); color:var(--ink); font-family:"Microsoft YaHei","PingFang SC",serif; }
-    .page { width:min(1180px,100%); margin:0 auto; padding:0 24px 42px; }
-    .site-header { height:82px; position:relative; display:flex; align-items:center; justify-content:center; border-bottom:1px solid rgba(119,72,47,.16); }
-    .site-header p { margin:0; color:#96634a; font:16px "STKaiti",KaiTi,serif; letter-spacing:.06em; }
-    .site-logo { position:absolute; right:0; display:flex; align-items:center; }
-    .site-logo img { display:block; width:270px; height:66px; object-fit:contain; object-position:right center; mix-blend-mode:multiply; }
-    .tabs { width:fit-content; display:flex; justify-content:center; gap:0; margin:20px auto 26px; padding:3px; border:1px solid rgba(119,72,47,.26); border-radius:10px; background:#f1e4d4; box-shadow:inset 0 2px 5px rgba(96,57,32,.13); overflow:hidden; }
-    .tabs a,.tabs b { min-width:112px; padding:9px 18px; border:0; border-radius:7px; color:var(--ink); font:600 14px "STKaiti",KaiTi,serif; text-align:center; text-decoration:none; }
-    .tabs a { background:#fffdf8; box-shadow:0 3px 7px rgba(96,57,32,.18); transform:translateY(-1px); }
-    .tabs b { background:#e5d2bc; box-shadow:inset 0 2px 5px rgba(96,57,32,.2); }
-    .hero { text-align:center; margin:0 auto 34px; }
-    .hero p { margin:0; color:#80533b; font-size:11px; letter-spacing:.18em; font-weight:800; }
-    .hero h1 { font:600 clamp(40px,4.2vw,52px)/1.08 KaiTi,STKaiti,serif; margin:8px 0 2px; letter-spacing:-.04em; }
-    .hero .hero-description { margin-top:10px; color:#80533b; font-size:16px; font-weight:400; letter-spacing:0; }
-    .workspace { display:grid; grid-template-columns:355px minmax(0,1fr); gap:22px; align-items:start; }
-    .panel { background:rgba(255,253,248,.94); border:1px solid rgba(255,255,255,.8); box-shadow:0 14px 38px rgba(93,53,28,.1); border-radius:22px; padding:20px; }
-    .panel h2 { font-family:KaiTi,STKaiti,serif; font-size:15px; margin:0 0 5px; }
-    .hint { margin:0 0 17px; color:#9b7258; font-size:10px; line-height:1.7; }
-    .section-title { display:flex; align-items:center; gap:8px; margin:24px 0 10px; color:#78472c; font-size:15px; font-weight:700; }
-    .section-title::before { content:""; width:5px; height:5px; border-radius:50%; background:#c98257; }
-    .upload-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .upload { display:grid; gap:7px; min-width:0; }
-    .upload-label { display:flex; justify-content:space-between; color:#7d5038; font-size:12px; }
-    .upload-box { height:116px; display:grid; place-items:center; overflow:hidden; cursor:pointer; border:1px dashed #d89c76; border-radius:12px; background:#fffaf3; color:#a47053; transition:.2s; }
-    .upload-box:hover { border-color:#9c5e3c; background:#fff7ee; }
-    .upload-box img { width:100%; height:100%; object-fit:cover; }
-    .upload-box span { font-size:12px; text-align:center; line-height:1.7; }
-    .mini-zoom { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:5px; color:#9a7057; font-size:10px; }
-    .mini-zoom input { min-width:0; width:100%; accent-color:#8a5635; }
-    .mini-zoom b { min-width:30px; font-weight:500; text-align:right; }
-    .upload .control { gap:4px; margin-top:0; }
-    .upload .control label { display:flex; justify-content:space-between; font-size:10px; }
-    .upload .control input[type=range] { margin:0; }
-    .control { display:grid; gap:6px; margin-top:11px; }
-    .control label { color:#87583e; font-size:11px; }
-    .subtitle-label { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#87583e; font-size:11px; }
-    .subtitle-label button { padding:2px 7px; border-radius:7px; background:#fff8ef; color:#8a5635; font-size:10px; }
-    input,select,button { font:inherit; }
-    input[type=text],select { width:100%; border:1px solid #e0c7ae; background:#fffdfa; color:#603920; padding:10px 11px; border-radius:10px; outline:none; }
-    input[type=text]:focus,select:focus { border-color:#a86642; box-shadow:0 0 0 3px rgba(168,102,66,.1); }
-    input[type=range] { width:100%; accent-color:#8a5635; }
-    .slider-value { float:right; color:#a06948; }
-    .theme-switch { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
-    .theme-choice { padding:9px 7px; font-size:11px; color:#754529; background:#fffdfa; }
-    .theme-choice[data-theme="warm"] { border-color:#b47a55; }.theme-choice[data-theme="jade"] { border-color:#4b847c; }.theme-choice[data-theme="ink"] { border-color:#426686; }.theme-choice[data-theme="rose"] { border-color:#a64f70; }
-    .theme-choice.active { color:#fff; background:#8a5635; border-color:#8a5635; box-shadow:inset 0 2px 5px rgba(0,0,0,.18); }
-    .buttons { display:grid; gap:9px; margin-top:20px; }
-    button { cursor:pointer; border-radius:11px; padding:12px; border:1px solid #e2c7b0; background:#fffaf5; color:#754529; }
-    button.primary { border:0; background:linear-gradient(100deg,#754529,#9c603b); color:#fff; font-weight:700; box-shadow:0 9px 16px rgba(107,60,34,.18); }
-    .stage { min-height:700px; display:grid; place-items:center; padding:24px; border-radius:22px; overflow:hidden; background:radial-gradient(circle at 18% 12%,#956042 0,#70402c 38%,#3a2119 100%); box-shadow:0 17px 38px rgba(67,37,22,.18); }
-    .stage canvas { display:block; width:min(100%,500px); height:auto; background:var(--paper); box-shadow:0 20px 38px rgba(18,8,4,.35); touch-action:none; user-select:none; }
-    .stage-note { margin:14px 0 0; color:#f6dabe; font-size:12px; text-align:center; }
-    .site-footer { margin-top:34px; padding-top:20px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(119,72,47,.18); color:#96634a; font:13px "STKaiti",KaiTi,serif; }
-    .site-footer p { margin:0; }.site-footer div { display:flex; align-items:center; gap:12px; }.site-footer img { width:112px; height:112px; padding:4px; background:#fff; border:1px solid rgba(119,72,47,.18); }.site-footer span { font-size:12px; }
-    @media (max-width:760px) { .page{padding:0 14px 32px;} .site-header{height:66px;justify-content:flex-start}.site-header p{font-size:12px;letter-spacing:.02em;white-space:nowrap}.site-logo img{width:160px;height:45px}.workspace{display:flex; flex-direction:column; gap:14px;} .stage{order:-1; min-height:0; padding:18px 10px 14px;} .panel{width:100%;} .hero h1{font-size:27px;} .site-footer{margin-top:25px;padding-top:18px;flex-direction:column;gap:14px;text-align:center;} }
-    @media (max-width:760px) { .hero h1 { font-size:21px; } .hero .hero-description { font-size:11px; white-space:nowrap; } }
+    :root{--ink:#6e4025;--muted:#845238;--accent:#b7794f;--paper:#f8f2e7;--soft:#ead8c3}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#f4ebdf,#e9dbc9);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",serif}
+    .page{width:min(1180px,100%);margin:auto;padding:0 24px 42px}.site-header{height:82px;position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(119,72,47,.16)}.site-header p{margin:0;color:#96634a;font:16px "STKaiti",KaiTi,serif;letter-spacing:.06em}.site-logo{position:absolute;right:0;display:flex;align-items:center}.site-logo img{display:block;width:270px;height:66px;object-fit:contain;object-position:right center;mix-blend-mode:multiply}
+    .tabs{width:fit-content;display:flex;justify-content:center;gap:0;margin:20px auto 26px;padding:3px;border:1px solid rgba(119,72,47,.26);border-radius:10px;background:#f1e4d4;box-shadow:inset 0 2px 5px rgba(96,57,32,.13);overflow:hidden}.tabs a,.tabs b{min-width:126px;padding:10px 19px;border:0;border-radius:7px;color:var(--ink);font:600 14px "STKaiti",KaiTi,serif;text-align:center;text-decoration:none}.tabs a{background:#fffdf8;box-shadow:0 3px 7px rgba(96,57,32,.18);transform:translateY(-1px)}.tabs b{background:#e5d2bc;box-shadow:inset 0 2px 5px rgba(96,57,32,.2)}
+    .hero{text-align:center;margin:0 auto 34px}.hero p{margin:0;color:#80533b;font-size:11px;letter-spacing:.18em;font-weight:800}.hero h1{font:600 clamp(40px,4.2vw,52px)/1.08 KaiTi,STKaiti,serif;margin:8px 0 2px;letter-spacing:-.04em}.hero .hero-description{margin-top:10px;color:#80533b;font-size:16px;font-weight:400;letter-spacing:0}
+    .workspace{display:grid;grid-template-columns:355px minmax(0,1fr);gap:22px;align-items:start}.panel{background:rgba(255,253,248,.94);border:1px solid rgba(255,255,255,.8);box-shadow:0 14px 38px rgba(93,53,28,.1);border-radius:22px;padding:20px}.section-title{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:#78472c;font-size:15px;font-weight:700}.section-title:not(:first-child){margin-top:24px}.section-title:before{content:"";width:5px;height:5px;border-radius:50%;background:#c98257}.hint{margin:-2px 0 14px;color:#9b7258;font-size:10px;line-height:1.7}
+    .upload{display:grid;gap:7px}.upload-label{display:flex;justify-content:space-between;color:#7d5038;font-size:12px}.upload-box{height:142px;display:grid;place-items:center;overflow:hidden;cursor:pointer;border:1px dashed #d89c76;border-radius:12px;background:#fffaf3;color:#a47053;transition:.2s}.upload-box:hover{border-color:#9c5e3c;background:#fff7ee}.upload-box img{width:100%;height:100%;object-fit:cover}.upload-box span{font-size:12px;text-align:center;line-height:1.7}
+    .control{display:grid;gap:6px;margin-top:12px}.control label,.subtitle-label{color:#87583e;font-size:11px}.subtitle-label{display:flex;align-items:center;justify-content:space-between;gap:8px}.subtitle-label button{padding:2px 7px;border-radius:7px;background:#fff8ef;color:#8a5635;font-size:10px}input,select,button{font:inherit}input[type=text],select{width:100%;border:1px solid #e0c7ae;background:#fffdfa;color:#603920;padding:10px 11px;border-radius:10px;outline:none}input[type=text]:focus,select:focus{border-color:#a86642;box-shadow:0 0 0 3px rgba(168,102,66,.1)}input[type=range]{width:100%;accent-color:#8a5635}.slider-value{float:right;color:#a06948}
+    .theme-switch{display:grid;grid-template-columns:1fr 1fr;gap:7px}.theme-choice{padding:9px 7px;font-size:11px;color:#754529;background:#fffdfa;border:1px solid #e2c7b0;border-radius:11px}.theme-choice.active{color:#fff;background:#8a5635;border-color:#8a5635;box-shadow:inset 0 2px 5px rgba(0,0,0,.18)}.buttons{display:grid;gap:9px;margin-top:20px}button{cursor:pointer;border-radius:11px;padding:12px;border:1px solid #e2c7b0;background:#fffaf5;color:#754529}.primary{border:0;background:linear-gradient(100deg,#754529,#9c603b);color:#fff;font-weight:700;box-shadow:0 9px 16px rgba(107,60,34,.18)}.ai-button{display:flex;justify-content:center;align-items:center;gap:7px}.ai-button[disabled]{opacity:.58;cursor:wait}.status{min-height:30px;margin:10px 0 0;color:#976346;font-size:11px;line-height:1.55}.status.error{color:#a33f42}
+    .stage{min-height:700px;display:grid;place-items:center;padding:24px;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 18% 12%,#956042 0,#70402c 38%,#3a2119 100%);box-shadow:0 17px 38px rgba(67,37,22,.18)}.stage canvas{display:block;width:min(100%,500px);height:auto;background:var(--paper);box-shadow:0 20px 38px rgba(18,8,4,.35);touch-action:none;user-select:none}.stage-note{margin:14px 0 0;color:#f6dabe;font-size:12px;text-align:center}.site-footer{margin-top:34px;padding-top:20px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(119,72,47,.18);color:#96634a;font:13px "STKaiti",KaiTi,serif}.site-footer p{margin:0}.site-footer div{display:flex;align-items:center;gap:12px}.site-footer img{width:112px;height:112px;padding:4px;background:#fff;border:1px solid rgba(119,72,47,.18)}.site-footer span{font-size:12px}
+    @media(max-width:760px){.page{padding:0 14px 32px}.site-header{height:66px;justify-content:flex-start}.site-header p{font-size:12px;letter-spacing:.02em;white-space:nowrap}.site-logo img{width:160px;height:45px}.workspace{display:flex;flex-direction:column;gap:14px}.stage{order:-1;min-height:0;padding:18px 10px 14px}.panel{width:100%}.hero h1{font-size:21px}.hero .hero-description{max-width:100%;padding:0 6px;font-size:11px;line-height:1.65;white-space:normal;overflow-wrap:anywhere}.site-footer{margin-top:25px;padding-top:18px;flex-direction:column;gap:14px;text-align:center}}
   </style>
 </head>
 <body>
   <main class="page">
     <header class="site-header"><p>第九个中国医师节 · 致敬每一位中国医师</p><a class="site-logo" href="https://www.dkmedtech.com/" target="_blank" rel="noreferrer" aria-label="鼎科医疗官网"><img src="/dkmedtech-logo.png" alt="鼎科医疗 DK MEDTECH"></a></header>
     <nav class="tabs" aria-label="海报类型"><b>我是医生</b><a href="/">献给医生</a></nav>
-    <header class="hero"><p>CHINESE DOCTORS' DAY · MY MEDICAL JOURNEY</p><h1>我的医路 · 医路如初</h1><p class="hero-description">上传过往与现在的照片，自定义两张照片的年份；可分别拖动照片位置或调整缩放，生成固定比例的纪念海报。</p></header>
+    <header class="hero"><p>CHINESE DOCTORS' DAY · MY MEDICAL JOURNEY</p><h1>我的医路 · 初心如一</h1><p class="hero-description">上传一张历史照片，生成以你为主角的素描线稿主视觉，留下专属医路纪念。</p></header>
     <section class="workspace">
       <aside class="panel">
-        <div class="section-title">两段时光</div>
-        <div class="upload-grid">
-          <label class="upload"><span class="upload-label"><span>过往</span><span id="oldYearLabel">2016</span></span><span class="upload-box"><input id="oldFile" type="file" accept="image/*" hidden><span id="oldText">＋<br>上传过往照片</span><img id="oldThumb" hidden alt="过往照片预览"></span></label>
-          <label class="upload"><span class="upload-label"><span>现在</span><span id="nowYearLabel">2026</span></span><span class="upload-box"><input id="nowFile" type="file" accept="image/*" hidden><span id="nowText">＋<br>上传现在照片</span><img id="nowThumb" hidden alt="现在照片预览"></span></label>
-        </div>
-        <div class="section-title">文字与年份</div>
-        <div class="control"><label for="template">主题文案</label><select id="template"><option value="我的医路|">我的医路</option><option value="{years}年医路，向光而行|">__年医路，向光而行</option><option value="执医{years}年，热爱不减|">执医__年，热爱不减</option><option value="行医{years}年，不负热爱|">行医__年，不负热爱</option><option value="执灯行医，岁岁经年|">执灯行医，岁岁经年</option></select></div>
+        <div class="section-title">历史照片</div><p class="hint">这张照片会作为小尺寸的时光印记，同时用于生成中央的素描主视觉。</p>
+        <label class="upload"><span class="upload-label"><span>上传照片</span><span id="photoYearLabel">2016</span></span><span class="upload-box"><input id="photoFile" type="file" accept="image/*" hidden><span id="photoText">＋<br>上传历史照片</span><img id="photoThumb" hidden alt="历史照片预览"></span></label>
+        <div class="control"><label for="photoYear">照片年份</label><input id="photoYear" type="text" inputmode="numeric" maxlength="4" value="2016"></div>
+        <div class="control"><label for="photoZoom">照片缩放 <span class="slider-value" id="photoZoomValue">110%</span></label><input id="photoZoom" type="range" min=".7" max="2" step=".01" value="1.1"></div>
+        <div class="section-title">AI 素描主视觉</div><p class="hint">自动识别人物主体，生成适用于海报中央的细腻铅笔线稿。照片仅用于本次生成。</p>
+        <button id="generateSketch" class="primary ai-button" type="button">✦ 生成我的素描线稿</button><p id="status" class="status">上传照片后，即可生成。</p>
+        <div class="control"><label for="sketchZoom">线稿缩放 <span class="slider-value" id="sketchZoomValue">100%</span></label><input id="sketchZoom" type="range" min=".7" max="1.55" step=".01" value="1"></div>
+        <div class="section-title">文字与主题</div>
+        <div class="control"><label for="template">主标题</label><select id="template"><option value="我的医路">我的医路</option><option value="{years}年医路，向光而行">__年医路，向光而行</option><option value="执医{years}年，热爱不减">执医__年，热爱不减</option><option value="行医{years}年，不负热爱">行医__年，不负热爱</option><option value="执灯行医，岁岁经年">执灯行医，岁岁经年</option></select></div>
         <div class="control"><label for="practiceYears">从医年限（年）</label><input id="practiceYears" type="text" inputmode="numeric" maxlength="2" value="10"></div>
         <div class="control"><div class="subtitle-label"><label for="storySubtitle">副标题</label><button id="randomSubtitle" type="button">换一句</button></div><input id="storySubtitle" type="text" maxlength="28" value="每一段时光，都在为生命守望"></div>
-        <div class="upload-grid"><div class="control"><label for="oldYear">照片年份</label><input id="oldYear" type="text" inputmode="numeric" maxlength="4" value="2016"></div><div class="control"><label for="nowYear">照片年份</label><input id="nowYear" type="text" inputmode="numeric" maxlength="4" value="2026"></div></div>
-        <div class="control"><label for="oldZoom">十年前照片缩放 <span class="slider-value" id="oldZoomValue">110%</span></label><input id="oldZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
-        <div class="control"><label for="nowZoom">现在照片缩放 <span class="slider-value" id="nowZoomValue">110%</span></label><input id="nowZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
-        <div class="section-title">画面配色</div>
         <div class="theme-switch" role="group" aria-label="画面配色"><button type="button" class="theme-choice active" data-theme="warm">暖棕温暖</button><button type="button" class="theme-choice" data-theme="jade">青绿守护</button><button type="button" class="theme-choice" data-theme="ink">深蓝智慧</button><button type="button" class="theme-choice" data-theme="rose">绯色致敬</button></div>
         <div class="buttons"><button id="reset" type="button">恢复默认</button><button id="download" class="primary" type="button">下载高清海报</button></div>
       </aside>
-      <section class="stage"><div><canvas id="poster" width="1160" height="1920" aria-label="我的十年海报预览"></canvas><p class="stage-note">拖动图片可改变位置</p></div></section>
+      <section class="stage"><div><canvas id="poster" width="1160" height="1920" aria-label="我的医路海报预览"></canvas><p class="stage-note">拖动图片可改变位置</p></div></section>
     </section>
     <footer class="site-footer"><p>© 2026 苏州鼎科医疗技术股份有限公司.</p><div><img src="/official-account-qr.jpg" alt="鼎科医疗微信公众号二维码"><span>关注鼎科医疗公众号</span></div></footer>
   </main>
   <script>
-    (() => {
-      const W=1160,H=1920, $=s=>document.querySelector(s), canvas=$('#poster');
-      const posterLogo=new Image(); posterLogo.onload=()=>draw(); posterLogo.src='/dkmedtech-poster-mark.png';
-      const state={old:null,now:null,oldZoom:1.1,nowZoom:1.1,theme:'warm',pos:{old:{x:0,y:0},now:{x:0,y:0}}};
-      const themes={warm:{paper:'#f8f2e7',ink:'#6e4025',muted:'#845238',accent:'#b7794f',soft:'#ead8c3',stream:'rgba(142,94,55,.18)'},jade:{paper:'#eef5f1',ink:'#20564f',muted:'#37746b',accent:'#4e8a7d',soft:'#d7e7df',stream:'rgba(37,107,94,.18)'},ink:{paper:'#eef3f7',ink:'#193e60',muted:'#356a93',accent:'#4c86b5',soft:'#d8e7f2',stream:'rgba(37,87,130,.18)'},rose:{paper:'#fbf0f4',ink:'#722e4d',muted:'#994b6b',accent:'#cb6687',soft:'#f2d9e2',stream:'rgba(142,62,96,.18)'}};
-      const storySubtitles=['每一段时光，都在为生命守望','岁月流转，仁心始终如一','一路向前，只为守护生命','医路有光，步履不停','时间沉淀专业，也珍藏热爱','把青春留给医路，把温暖留给患者'];
-      const randomSubtitle=()=>{const input=$('#storySubtitle');const choices=storySubtitles.filter(item=>item!==input.value);input.value=choices[Math.floor(Math.random()*choices.length)];draw();};
-      ['old','now'].forEach(kind=>{const upload=$('#'+kind+'File').closest('.upload');const zoomControl=$('#'+kind+'Zoom').closest('.control');const zoomLabel=zoomControl.querySelector('label');zoomLabel.childNodes[0].nodeValue='照片缩放 ';zoomControl.classList.add('photo-zoom-inline');upload.append(zoomControl);const yearControl=$('#'+kind+'Year').closest('.control');yearControl.classList.add('photo-year-inline');upload.append(yearControl);});
-      const frames={old:{x:88,y:725,w:450,h:700,r:-.045},now:{x:608,y:629,w:462,h:756,r:.035}};
-      function path(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
-      function fitText(g,text,max,font){ g.font=font; let size=parseInt(font,10); while(g.measureText(text).width>max && size>28){size-=2;g.font=font.replace(/^\d+px/,size+'px');} return g.font; }
-      function cover(g,img,x,y,w,h,zoom,pos,filter){
-        g.save(); path(g,x,y,w,h,3); g.clip();
-        if(img){ const sc=Math.max(w/img.width,h/img.height)*zoom, dw=img.width*sc, dh=img.height*sc; g.filter=filter||'none'; g.drawImage(img,x+(w-dw)/2+(dw-w)*pos.x/2,y+(h-dh)/2+(dh-h)*pos.y/2,dw,dh); g.filter='none'; }
-        else { g.fillStyle='#ead8c3';g.fillRect(x,y,w,h);g.strokeStyle='rgba(124,76,43,.26)';g.lineWidth=2; for(let i=-h;i<w;i+=36){g.beginPath();g.moveTo(x+i,y);g.lineTo(x+i+h,y+h);g.stroke();}g.fillStyle='#a57758';g.font='29px KaiTi,serif';g.textAlign='center';g.fillText('上传照片',x+w/2,y+h/2); }
-        g.restore();
-      }
-      function card(g,key,year,p){
-        const f=frames[key],cx=f.x+f.w/2,cy=f.y+f.h/2;g.save();g.translate(cx,cy);g.rotate(f.r);g.translate(-cx,-cy);
-        g.shadowColor='rgba(79,48,28,.22)';g.shadowBlur=24;g.shadowOffsetY=13;g.fillStyle=key==='old'?p.soft:'#fffdf7';path(g,f.x,f.y,f.w,f.h,24);g.fill();g.shadowColor='transparent';
-        if(key==='old'){g.strokeStyle=p.accent;g.lineWidth=5;path(g,f.x+9,f.y+9,f.w-18,f.h-18,18);g.stroke();}
-        cover(g,state[key],f.x+25,f.y+27,f.w-50,f.h-132,state[key+'Zoom'],state.pos[key],'none');
-        g.strokeStyle=key==='old'?p.accent:'#e7d7c2';g.lineWidth=2;g.strokeRect(f.x+25,f.y+27,f.w-50,f.h-132);
-        g.fillStyle=p.ink;g.font='italic 48px Georgia,serif';g.textAlign='center';g.fillText(year,f.x+f.w/2,f.y+f.h-45);g.restore();
-      }
-      function flourish(g,p){
-        g.save();g.strokeStyle=p.stream;g.lineWidth=2;
-        for(let i=0;i<16;i++){g.beginPath();g.moveTo(625+i*27,-42);g.bezierCurveTo(820+i*8,168,1010,80,1210,205+i*15);g.stroke();}
-        for(let i=0;i<15;i++){g.beginPath();g.moveTo(-45,1475+i*22);g.bezierCurveTo(205,1535+i*5,130,1870-i*10,475,1960);g.stroke();}g.restore();
-      }
-      function timeStream(g,p){
-        g.save();g.strokeStyle=p.stream;g.lineWidth=2;g.setLineDash([11,14]);
-        [0,1,2].forEach(i=>{g.beginPath();g.arc(580,840,420+i*62,Math.PI*.1,Math.PI*.92);g.stroke();});
-        g.setLineDash([]);g.strokeStyle=p.stream;g.lineWidth=1.5;
-        for(let i=0;i<7;i++){g.beginPath();g.moveTo(90,450+i*18);g.bezierCurveTo(350,500-i*16,735,445+i*22,1075,524-i*12);g.stroke();}
-        g.fillStyle=p.muted;g.globalAlpha=.45;g.font='18px Georgia,serif';g.textAlign='center';['PAST','NOW','FORWARD'].forEach((t,i)=>g.fillText(t,258+i*322,490+(i%2)*20));g.restore();
-      }
-      function render(target,scale=1){
-        const p=themes[state.theme],g=target.getContext('2d');g.setTransform(scale,0,0,scale,0,0);g.clearRect(0,0,W,H);g.fillStyle=p.paper;g.fillRect(0,0,W,H);
-        g.fillStyle=p.stream;g.globalAlpha=.55;for(let y=24;y<H;y+=24)for(let x=24;x<W;x+=24){g.beginPath();g.arc(x+(y/24%2?7:0),y,1.05,0,Math.PI*2);g.fill();}g.globalAlpha=1;flourish(g,p);timeStream(g,p);
-        const option=$('#template').value.split('|'),years=Math.max(0,+$('#practiceYears').value||10);const title=option[0].replace('{years}',years),sub=option[1].replace('{years}',years);
-        g.fillStyle=p.muted;g.font='600 22px Arial,sans-serif';g.letterSpacing='3px';g.textAlign='center';g.fillText('CHINESE DOCTORS\' DAY · MY MEDICAL JOURNEY',580,178);
-        g.fillStyle=p.ink;fitText(g,title,900,'108px KaiTi,STKaiti,serif');g.fillText(title,580,325);
-        g.fillStyle=p.accent;fitText(g,$('#storySubtitle').value||storySubtitles[0],900,'42px KaiTi,STKaiti,serif');g.fillText($('#storySubtitle').value||storySubtitles[0],580,402);g.textAlign='left';
-        if(posterLogo.complete&&posterLogo.naturalWidth){g.drawImage(posterLogo,1035,24,99,99);}else{g.fillStyle='#f1e1cb';g.beginPath();g.arc(1084.5,73.5,40,0,Math.PI*2);g.fill();g.fillStyle='#9a613d';g.font='bold 16px Arial';g.textAlign='center';g.fillText('DK',1084.5,79.5);g.textAlign='left';}
-        g.strokeStyle=p.accent;g.lineWidth=3;g.beginPath();g.moveTo(580,590);g.lineTo(580,1428);g.stroke();g.fillStyle=p.accent;[590,1428].forEach(y=>{g.beginPath();g.arc(580,y,10,0,Math.PI*2);g.fill();});g.font='bold 28px Georgia,serif';g.textAlign='center';g.fillText($('#oldYear').value||'2016',580,555);g.fillText($('#nowYear').value||'2026',580,1475);g.textAlign='left';
-        card(g,'old',$('#oldYear').value||'2016',p);card(g,'now',$('#nowYear').value||'2026',p);
-        g.strokeStyle=p.accent;g.lineWidth=2;g.beginPath();g.moveTo(88,1552);g.lineTo(1070,1552);g.stroke();g.fillStyle=p.ink;g.font='58px KaiTi,STKaiti,serif';g.textAlign='center';g.fillText('不负时光，不负信任',580,1644);
-        g.fillStyle=p.muted;g.font='27px KaiTi,serif';g.fillText('每一段光阴，都在守护生命的路上。',580,1754);g.font='22px Arial,sans-serif';g.fillText('DK MEDTECH · 致敬中国医师',580,1794);g.textAlign='left';
-      }
-      function draw(){render(canvas,1);}
-      function load(kind){ const input=$('#'+kind+'File'); input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{state[kind]=img;const thumb=$('#'+kind+'Thumb');thumb.src=url;thumb.hidden=false;$('#'+kind+'Text').hidden=true;draw();};img.src=url;});}
-      load('old');load('now');
-      ['template','oldYear','nowYear','practiceYears','storySubtitle'].forEach(id=>$( '#'+id).addEventListener('input',()=>{ $('#oldYearLabel').textContent=$('#oldYear').value||'2016';$('#nowYearLabel').textContent=$('#nowYear').value||'2026';draw(); }));
-      $('#randomSubtitle').addEventListener('click',randomSubtitle);
-      ['old','now'].forEach(kind=>{$('#'+kind+'Zoom').addEventListener('input',e=>{state[kind+'Zoom']=+e.target.value;$('#'+kind+'ZoomValue').textContent=Math.round(state[kind+'Zoom']*100)+'%';draw();});});
-      document.querySelectorAll('.theme-choice').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.theme;document.querySelectorAll('.theme-choice').forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.style.background=active?themes[state.theme].ink:'';item.style.borderColor=active?themes[state.theme].ink:'';});draw();}));
-      let drag=null;canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),px=(e.clientX-r.left)*W/r.width,py=(e.clientY-r.top)*H/r.height;let hit=Object.keys(frames).find(k=>{const f=frames[k];return px>=f.x&&px<=f.x+f.w&&py>=f.y&&py<=f.y+f.h;});if(!hit)return;drag={kind:hit,x:e.clientX,y:e.clientY,pos:{...state.pos[hit]}};canvas.setPointerCapture(e.pointerId);});
-      canvas.addEventListener('pointermove',e=>{if(!drag)return;const r=canvas.getBoundingClientRect(),dx=(e.clientX-drag.x)*W/r.width,dy=(e.clientY-drag.y)*H/r.height;state.pos[drag.kind]={x:Math.max(-1,Math.min(1,drag.pos.x+dx/180)),y:Math.max(-1,Math.min(1,drag.pos.y+dy/180))};draw();});
-      ['pointerup','pointercancel'].forEach(type=>canvas.addEventListener(type,()=>drag=null));
-      $('#reset').addEventListener('click',()=>{state.old=state.now=null;state.oldZoom=state.nowZoom=1.1;state.pos={old:{x:0,y:0},now:{x:0,y:0}};['old','now'].forEach(k=>{$('#'+k+'File').value='';$('#'+k+'Thumb').hidden=true;$('#'+k+'Text').hidden=false;$('#'+k+'Zoom').value=1.1;$('#'+k+'ZoomValue').textContent='110%';});$('#template').selectedIndex=0;$('#oldYear').value='2016';$('#nowYear').value='2026';$('#practiceYears').value='10';$('#storySubtitle').value=storySubtitles[0];$('#oldYearLabel').textContent='2016';$('#nowYearLabel').textContent='2026';draw();});
-      $('#download').addEventListener('click',()=>{const out=document.createElement('canvas');out.width=2320;out.height=3840;render(out,2);const a=document.createElement('a');a.download='我的十年-医师节海报.png';a.href=out.toDataURL('image/png');a.click();});
-      $('#reset').addEventListener('click',()=>{state.theme='warm';document.querySelectorAll('.theme-choice').forEach(item=>{item.classList.toggle('active',item.dataset.theme==='warm');item.style.background='';item.style.borderColor='';});draw();});
-      randomSubtitle();
-    })();
+  (()=>{
+    const W=1160,H=1920,$=s=>document.querySelector(s),canvas=$('#poster');
+    const state={photo:null,sketch:null,photoData:'',photoZoom:1.1,sketchZoom:1,theme:'warm',pos:{photo:{x:0,y:0},sketch:{x:0,y:0}}};
+    const logo=new Image();logo.onload=draw;logo.src='./dkmedtech-poster-mark.png';
+    const themes={warm:{paper:'#f8f2e7',ink:'#6e4025',muted:'#845238',accent:'#b7794f',soft:'#ead8c3',stream:'rgba(142,94,55,.20)'},jade:{paper:'#eef5f1',ink:'#20564f',muted:'#37746b',accent:'#4e8a7d',soft:'#d7e7df',stream:'rgba(37,107,94,.20)'},ink:{paper:'#eef3f7',ink:'#193e60',muted:'#356a93',accent:'#4c86b5',soft:'#d8e7f2',stream:'rgba(37,87,130,.20)'},rose:{paper:'#fbf0f4',ink:'#722e4d',muted:'#994b6b',accent:'#cb6687',soft:'#f2d9e2',stream:'rgba(142,62,96,.20)'}};
+    const subtitles=['每一段时光，都在为生命守望','岁月流转，仁心始终如一','一路向前，只为守护生命','医路有光，步履不停','时间沉淀专业，也珍藏热爱','把青春留给医路，把温暖留给患者'];
+    const frames={sketch:{x:236,y:505,w:688,h:820},photo:{x:92,y:1146,w:350,h:470}};
+    function round(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+    function fit(g,text,max,font){g.font=font;let s=parseInt(font,10);while(g.measureText(text).width>max&&s>22){s-=2;g.font=font.replace(/^\d+px/,s+'px')}return g.font}
+    function drawPhoto(g,img,f,zoom,pos,placeholder,blend){g.save();round(g,f.x,f.y,f.w,f.h,4);g.clip();if(img){const sc=Math.max(f.w/img.width,f.h/img.height)*zoom,dw=img.width*sc,dh=img.height*sc;g.globalCompositeOperation=blend||'source-over';g.drawImage(img,f.x+(f.w-dw)/2+(dw-f.w)*pos.x/2,f.y+(f.h-dh)/2+(dh-f.h)*pos.y/2,dw,dh);g.globalCompositeOperation='source-over'}else{g.fillStyle='#ede0ce';g.fillRect(f.x,f.y,f.w,f.h);g.strokeStyle='rgba(124,76,43,.26)';g.lineWidth=2;for(let i=-f.h;i<f.w;i+=34){g.beginPath();g.moveTo(f.x+i,f.y);g.lineTo(f.x+i+f.h,f.y+f.h);g.stroke()}g.fillStyle='#a57758';g.font='28px KaiTi,serif';g.textAlign='center';g.fillText(placeholder,f.x+f.w/2,f.y+f.h/2)}g.restore()}
+    function timeFlow(g,p){g.save();g.strokeStyle=p.stream;g.lineWidth=2;for(let i=0;i<23;i++){g.beginPath();g.moveTo(-80,220+i*18);g.bezierCurveTo(175,138+i*3,395,440-i*5,732,294+i*9);g.bezierCurveTo(900,228+i*8,1010,185+i*3,1230,318+i*13);g.stroke()}for(let i=0;i<15;i++){g.beginPath();g.moveTo(700+i*25,-20);g.bezierCurveTo(920,164+i*4,1002,160,1210,90+i*20);g.stroke()}g.restore()}
+    function render(target,scale=1){const p=themes[state.theme],g=target.getContext('2d');g.setTransform(scale,0,0,scale,0,0);g.clearRect(0,0,W,H);g.fillStyle=p.paper;g.fillRect(0,0,W,H);g.fillStyle=p.stream;g.globalAlpha=.45;for(let y=23;y<H;y+=23)for(let x=23;x<W;x+=23){g.beginPath();g.arc(x+(y/23%2?7:0),y,1,0,Math.PI*2);g.fill()}g.globalAlpha=1;timeFlow(g,p);
+      const years=$('#practiceYears').value.trim()||'10',title=$('#template').value.replace('{years}',years),subtitle=$('#storySubtitle').value.trim()||subtitles[0];g.textAlign='center';g.fillStyle=p.muted;g.font='600 21px Arial,sans-serif';g.letterSpacing='3px';g.fillText("CHINESE DOCTORS' DAY · MY MEDICAL JOURNEY",580,178);g.fillStyle=p.ink;fit(g,title,920,'102px KaiTi,STKaiti,serif');g.fillText(title,580,328);g.fillStyle=p.accent;fit(g,subtitle,920,'43px KaiTi,STKaiti,serif');g.fillText(subtitle,580,408);g.letterSpacing='0px';
+      if(logo.complete&&logo.naturalWidth)g.drawImage(logo,1035,24,99,99);else{g.fillStyle=p.accent;g.beginPath();g.arc(1085,74,40,0,Math.PI*2);g.fill()}
+      g.fillStyle=p.muted;g.globalAlpha=.54;g.font='18px Georgia,serif';g.fillText('PAST',245,1035);g.fillText('NOW',578,1035);g.fillText('FORWARD',908,1035);g.globalAlpha=1;g.strokeStyle=p.accent;g.lineWidth=3;g.beginPath();g.moveTo(170,1062);g.lineTo(986,1062);g.stroke();[170,580,986].forEach(x=>{g.fillStyle=p.accent;g.beginPath();g.arc(x,1062,8,0,Math.PI*2);g.fill()});
+      g.save();g.shadowColor='rgba(74,40,20,.18)';g.shadowBlur=28;g.shadowOffsetY=16;g.fillStyle='#fffdf8';round(g,frames.sketch.x-16,frames.sketch.y-16,frames.sketch.w+32,frames.sketch.h+32,36);g.fill();g.restore();drawPhoto(g,state.sketch,frames.sketch,state.sketchZoom,state.pos.sketch,'AI 素描主视觉','multiply');g.strokeStyle=p.accent;g.lineWidth=4;round(g,frames.sketch.x,frames.sketch.y,frames.sketch.w,frames.sketch.h,28);g.stroke();
+      g.save();g.shadowColor='rgba(74,40,20,.18)';g.shadowBlur=20;g.shadowOffsetY=12;g.fillStyle=p.soft;round(g,frames.photo.x-12,frames.photo.y-12,frames.photo.w+24,frames.photo.h+104,20);g.fill();g.restore();drawPhoto(g,state.photo,frames.photo,state.photoZoom,state.pos.photo,'历史照片');g.strokeStyle=p.accent;g.lineWidth=3;g.strokeRect(frames.photo.x,frames.photo.y,frames.photo.w,frames.photo.h);g.fillStyle=p.ink;g.font='italic 44px Georgia,serif';g.fillText($('#photoYear').value||'2016',frames.photo.x+frames.photo.w/2,frames.photo.y+frames.photo.h+60);
+      g.strokeStyle=p.accent;g.lineWidth=2;g.beginPath();g.moveTo(160,1670);g.lineTo(1000,1670);g.stroke();g.fillStyle=p.ink;g.font='56px KaiTi,STKaiti,serif';g.fillText('时间在变，守护不变',580,1760);g.fillStyle=p.muted;g.font='25px KaiTi,serif';g.fillText('每一段时光，都在为生命守望',580,1810);g.font='21px Arial,sans-serif';g.fillText('DK MEDTECH · THANK YOU DOCTORS',580,1858);g.textAlign='left'}
+    function draw(){render(canvas,1)}
+    function refresh(){ $('#photoYearLabel').textContent=$('#photoYear').value||'2016';draw() }
+    $('#photoFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;if(f.size>8*1024*1024){setStatus('请上传小于 8MB 的图片。',true);return}const url=URL.createObjectURL(f),img=new Image();const reader=new FileReader();reader.onload=()=>{state.photoData=reader.result};reader.readAsDataURL(f);img.onload=()=>{state.photo=img;state.sketch=null;state.pos={photo:{x:0,y:0},sketch:{x:0,y:0}};$('#photoThumb').src=url;$('#photoThumb').hidden=false;$('#photoText').hidden=true;setStatus('照片已上传，可生成素描主视觉。');draw()};img.src=url});
+    function setStatus(text,error=false){const el=$('#status');el.textContent=text;el.classList.toggle('error',error)}
+    $('#generateSketch').addEventListener('click',async()=>{if(!state.photoData){setStatus('请先上传一张照片。',true);return}const button=$('#generateSketch');button.disabled=true;button.textContent='正在生成线稿…';setStatus('正在识别人物主体并绘制素描，请稍候。');try{const r=await fetch('/api/portrait-sketch',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({image:state.photoData})});const data=await r.json();if(!r.ok)throw new Error(data.error||'生成失败，请稍后重试。');const img=new Image();img.onload=()=>{state.sketch=img;state.pos.sketch={x:0,y:0};setStatus('素描主视觉已生成，可在海报上拖动位置。');draw()};img.src=data.image}catch(err){setStatus(err.message||'生成失败，请稍后重试。',true)}finally{button.disabled=false;button.textContent='✦ 重新生成素描线稿'}});
+    ['template','practiceYears','photoYear','storySubtitle'].forEach(id=>$('#'+id).addEventListener('input',refresh));$('#randomSubtitle').addEventListener('click',()=>{const current=$('#storySubtitle').value,items=subtitles.filter(x=>x!==current);$('#storySubtitle').value=items[Math.floor(Math.random()*items.length)];draw()});
+    [['photoZoom','photoZoomValue','photoZoom'],['sketchZoom','sketchZoomValue','sketchZoom']].forEach(([id,label,key])=>$('#'+id).addEventListener('input',e=>{state[key]=+e.target.value;$('#'+label).textContent=Math.round(state[key]*100)+'%';draw()}));
+    document.querySelectorAll('.theme-choice').forEach(btn=>btn.addEventListener('click',()=>{state.theme=btn.dataset.theme;document.querySelectorAll('.theme-choice').forEach(x=>{const active=x===btn;x.classList.toggle('active',active);x.style.background=active?themes[state.theme].ink:'';x.style.borderColor=active?themes[state.theme].ink:''});draw()}));
+    let drag=null;canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;const hit=Object.keys(frames).reverse().find(k=>{const f=frames[k];return x>=f.x&&x<=f.x+f.w&&y>=f.y&&y<=f.y+f.h});if(!hit||(hit==='sketch'&&!state.sketch)||(hit==='photo'&&!state.photo))return;drag={kind:hit,x:e.clientX,y:e.clientY,pos:{...state.pos[hit]}};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!drag)return;const r=canvas.getBoundingClientRect(),dx=(e.clientX-drag.x)*W/r.width,dy=(e.clientY-drag.y)*H/r.height;state.pos[drag.kind]={x:Math.max(-1,Math.min(1,drag.pos.x+dx/180)),y:Math.max(-1,Math.min(1,drag.pos.y+dy/180))};draw()});['pointerup','pointercancel'].forEach(t=>canvas.addEventListener(t,()=>drag=null));
+    $('#reset').addEventListener('click',()=>{state.photo=state.sketch=null;state.photoData='';state.photoZoom=1.1;state.sketchZoom=1;state.theme='warm';state.pos={photo:{x:0,y:0},sketch:{x:0,y:0}};$('#photoFile').value='';$('#photoThumb').hidden=true;$('#photoText').hidden=false;$('#photoYear').value='2016';$('#practiceYears').value='10';$('#template').selectedIndex=0;$('#storySubtitle').value=subtitles[0];$('#photoZoom').value=1.1;$('#sketchZoom').value=1;$('#photoZoomValue').textContent='110%';$('#sketchZoomValue').textContent='100%';$('#photoYearLabel').textContent='2016';document.querySelectorAll('.theme-choice').forEach(x=>{x.classList.toggle('active',x.dataset.theme==='warm');x.style.background='';x.style.borderColor=''});setStatus('上传照片后，即可生成。');draw()});
+    $('#download').addEventListener('click',()=>{const out=document.createElement('canvas');out.width=2320;out.height=3840;render(out,2);const a=document.createElement('a');a.download='我的医路-医师节海报.png';a.href=out.toDataURL('image/png');a.click()});
+    draw();
+  })();
   </script>
 </body>
 </html>
