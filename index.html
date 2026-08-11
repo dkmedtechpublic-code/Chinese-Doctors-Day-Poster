@@ -1,39 +1,167 @@
+﻿Wall time: 0.4 seconds
+Output:
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="医者有光：一键生成医师节肖像海报" />
-    <title>医者有光｜医师节海报生成器</title>
-    <script type="module" crossorigin src="/Chinese-Doctors-Day-Poster/assets/index-Yjg6vVhm.js"></script>
-    <link rel="stylesheet" crossorigin href="/Chinese-Doctors-Day-Poster/assets/index-CTbNt0s_.css">
-  </head>
-  <body>
-    <div id="root"></div>
-    <style>
-      .brand-logo img { mix-blend-mode: normal !important; }
-      @media (max-width: 840px) {
-        .tool-header .brand-logo { right: 0 !important; }
-        .site-footer img { display: block !important; }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>鎴戞槸鍖荤敓锝滄垜鐨勫崄骞?/title>
+  <style>
+    :root { --ink:#603920; --brown:#8a5635; --paper:#fbf7ef; --line:#ddaa7d; --soft:#f2e4d1; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#f4ebdf,#e9dbc9); color:var(--ink); font-family:"Microsoft YaHei","PingFang SC",serif; }
+    .page { width:min(1180px,100%); margin:0 auto; padding:0 24px 42px; }
+    .site-header { height:82px; position:relative; display:flex; align-items:center; justify-content:center; border-bottom:1px solid rgba(119,72,47,.16); }
+    .site-header p { margin:0; color:#96634a; font:16px "STKaiti",KaiTi,serif; letter-spacing:.06em; }
+    .site-logo { position:absolute; right:0; display:flex; align-items:center; }
+    .site-logo img { display:block; width:270px; height:66px; object-fit:contain; object-position:right center; mix-blend-mode:multiply; }
+    .tabs { width:fit-content; display:flex; justify-content:center; gap:0; margin:20px auto 26px; padding:3px; border:1px solid rgba(119,72,47,.26); border-radius:10px; background:#f1e4d4; box-shadow:inset 0 2px 5px rgba(96,57,32,.13); overflow:hidden; }
+    .tabs a,.tabs b { min-width:112px; padding:9px 18px; border:0; border-radius:7px; color:var(--ink); font:600 14px "STKaiti",KaiTi,serif; text-align:center; text-decoration:none; }
+    .tabs a { background:#fffdf8; box-shadow:0 3px 7px rgba(96,57,32,.18); transform:translateY(-1px); }
+    .tabs b { background:#e5d2bc; box-shadow:inset 0 2px 5px rgba(96,57,32,.2); }
+    .hero { text-align:center; margin:0 auto 34px; }
+    .hero p { margin:0; color:#80533b; font-size:11px; letter-spacing:.18em; font-weight:800; }
+    .hero h1 { font:600 clamp(40px,4.2vw,52px)/1.08 KaiTi,STKaiti,serif; margin:8px 0 2px; letter-spacing:-.04em; }
+    .hero .hero-description { margin-top:10px; color:#80533b; font-size:16px; font-weight:400; letter-spacing:0; }
+    .workspace { display:grid; grid-template-columns:355px minmax(0,1fr); gap:22px; align-items:start; }
+    .panel { background:rgba(255,253,248,.94); border:1px solid rgba(255,255,255,.8); box-shadow:0 14px 38px rgba(93,53,28,.1); border-radius:22px; padding:20px; }
+    .panel h2 { font-family:KaiTi,STKaiti,serif; font-size:15px; margin:0 0 5px; }
+    .hint { margin:0 0 17px; color:#9b7258; font-size:10px; line-height:1.7; }
+    .section-title { display:flex; align-items:center; gap:8px; margin:24px 0 10px; color:#78472c; font-size:15px; font-weight:700; }
+    .section-title::before { content:""; width:5px; height:5px; border-radius:50%; background:#c98257; }
+    .upload-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .upload { display:grid; gap:7px; min-width:0; }
+    .upload-label { display:flex; justify-content:space-between; color:#7d5038; font-size:12px; }
+    .upload-box { height:116px; display:grid; place-items:center; overflow:hidden; cursor:pointer; border:1px dashed #d89c76; border-radius:12px; background:#fffaf3; color:#a47053; transition:.2s; }
+    .upload-box:hover { border-color:#9c5e3c; background:#fff7ee; }
+    .upload-box img { width:100%; height:100%; object-fit:cover; }
+    .upload-box span { font-size:12px; text-align:center; line-height:1.7; }
+    .mini-zoom { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:5px; color:#9a7057; font-size:10px; }
+    .mini-zoom input { min-width:0; width:100%; accent-color:#8a5635; }
+    .mini-zoom b { min-width:30px; font-weight:500; text-align:right; }
+    .upload .control { gap:4px; margin-top:0; }
+    .upload .control label { display:flex; justify-content:space-between; font-size:10px; }
+    .upload .control input[type=range] { margin:0; }
+    .control { display:grid; gap:6px; margin-top:11px; }
+    .control label { color:#87583e; font-size:11px; }
+    .subtitle-label { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#87583e; font-size:11px; }
+    .subtitle-label button { padding:2px 7px; border-radius:7px; background:#fff8ef; color:#8a5635; font-size:10px; }
+    input,select,button { font:inherit; }
+    input[type=text],select { width:100%; border:1px solid #e0c7ae; background:#fffdfa; color:#603920; padding:10px 11px; border-radius:10px; outline:none; }
+    input[type=text]:focus,select:focus { border-color:#a86642; box-shadow:0 0 0 3px rgba(168,102,66,.1); }
+    input[type=range] { width:100%; accent-color:#8a5635; }
+    .slider-value { float:right; color:#a06948; }
+    .theme-switch { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+    .theme-choice { padding:9px 7px; font-size:11px; color:#754529; background:#fffdfa; }
+    .theme-choice[data-theme="warm"] { border-color:#b47a55; }.theme-choice[data-theme="jade"] { border-color:#4b847c; }.theme-choice[data-theme="ink"] { border-color:#426686; }.theme-choice[data-theme="rose"] { border-color:#a64f70; }
+    .theme-choice.active { color:#fff; background:#8a5635; border-color:#8a5635; box-shadow:inset 0 2px 5px rgba(0,0,0,.18); }
+    .buttons { display:grid; gap:9px; margin-top:20px; }
+    button { cursor:pointer; border-radius:11px; padding:12px; border:1px solid #e2c7b0; background:#fffaf5; color:#754529; }
+    button.primary { border:0; background:linear-gradient(100deg,#754529,#9c603b); color:#fff; font-weight:700; box-shadow:0 9px 16px rgba(107,60,34,.18); }
+    .stage { min-height:700px; display:grid; place-items:center; padding:24px; border-radius:22px; overflow:hidden; background:radial-gradient(circle at 18% 12%,#956042 0,#70402c 38%,#3a2119 100%); box-shadow:0 17px 38px rgba(67,37,22,.18); }
+    .stage canvas { display:block; width:min(100%,500px); height:auto; background:var(--paper); box-shadow:0 20px 38px rgba(18,8,4,.35); touch-action:none; user-select:none; }
+    .stage-note { margin:14px 0 0; color:#f6dabe; font-size:12px; text-align:center; }
+    .site-footer { margin-top:34px; padding-top:20px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(119,72,47,.18); color:#96634a; font:13px "STKaiti",KaiTi,serif; }
+    .site-footer p { margin:0; }.site-footer div { display:flex; align-items:center; gap:12px; }.site-footer img { width:112px; height:112px; padding:4px; background:#fff; border:1px solid rgba(119,72,47,.18); }.site-footer span { font-size:12px; }
+    @media (max-width:760px) { .page{padding:0 14px 32px;} .site-header{height:66px;justify-content:flex-start}.site-header p{font-size:12px;letter-spacing:.02em;white-space:nowrap}.site-logo img{width:160px;height:45px}.workspace{display:flex; flex-direction:column; gap:14px;} .stage{order:-1; min-height:0; padding:18px 10px 14px;} .panel{width:100%;} .hero h1{font-size:27px;} .site-footer{margin-top:25px;padding-top:18px;flex-direction:column;gap:14px;text-align:center;} }
+    @media (max-width:760px) { .hero h1 { font-size:21px; } .hero .hero-description { font-size:11px; white-space:nowrap; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="site-header"><p>绗節涓腑鍥藉尰甯堣妭 路 鑷存暚姣忎竴浣嶄腑鍥藉尰甯?/p><a class="site-logo" href="https://www.dkmedtech.com/" target="_blank" rel="noreferrer" aria-label="榧庣鍖荤枟瀹樼綉"><img src="./dkmedtech-logo.png" alt="榧庣鍖荤枟 DK MEDTECH"></a></header>
+    <nav class="tabs" aria-label="娴锋姤绫诲瀷"><b>鎴戞槸鍖荤敓</b><a href="./">鐚粰鍖荤敓</a></nav>
+    <header class="hero"><p>CHINESE DOCTORS' DAY 路 MY MEDICAL JOURNEY</p><h1>鎴戠殑鍖昏矾 路 鍖昏矾濡傚垵</h1><p class="hero-description">涓婁紶杩囧線涓庣幇鍦ㄧ殑鐓х墖锛岃嚜瀹氫箟涓ゅ紶鐓х墖鐨勫勾浠斤紱鍙垎鍒嫋鍔ㄧ収鐗囦綅缃垨璋冩暣缂╂斁锛岀敓鎴愬浐瀹氭瘮渚嬬殑绾康娴锋姤銆?/p></header>
+    <section class="workspace">
+      <aside class="panel">
+        <div class="section-title">涓ゆ鏃跺厜</div>
+        <div class="upload-grid">
+          <label class="upload"><span class="upload-label"><span>杩囧線</span><span id="oldYearLabel">2016</span></span><span class="upload-box"><input id="oldFile" type="file" accept="image/*" hidden><span id="oldText">锛?br>涓婁紶杩囧線鐓х墖</span><img id="oldThumb" hidden alt="杩囧線鐓х墖棰勮"></span></label>
+          <label class="upload"><span class="upload-label"><span>鐜板湪</span><span id="nowYearLabel">2026</span></span><span class="upload-box"><input id="nowFile" type="file" accept="image/*" hidden><span id="nowText">锛?br>涓婁紶鐜板湪鐓х墖</span><img id="nowThumb" hidden alt="鐜板湪鐓х墖棰勮"></span></label>
+        </div>
+        <div class="section-title">鏂囧瓧涓庡勾浠?/div>
+        <div class="control"><label for="template">涓婚鏂囨</label><select id="template"><option value="鎴戠殑鍖昏矾|">鎴戠殑鍖昏矾</option><option value="{years}骞村尰璺紝鍚戝厜鑰岃|">__骞村尰璺紝鍚戝厜鑰岃</option><option value="鎵у尰{years}骞达紝鐑埍涓嶅噺|">鎵у尰__骞达紝鐑埍涓嶅噺</option><option value="琛屽尰{years}骞达紝涓嶈礋鐑埍|">琛屽尰__骞达紝涓嶈礋鐑埍</option><option value="鎵х伅琛屽尰锛屽瞾宀佺粡骞磡">鎵х伅琛屽尰锛屽瞾宀佺粡骞?/option></select></div>
+        <div class="control"><label for="practiceYears">浠庡尰骞撮檺锛堝勾锛?/label><input id="practiceYears" type="text" inputmode="numeric" maxlength="2" value="10"></div>
+        <div class="control"><div class="subtitle-label"><label for="storySubtitle">鍓爣棰?/label><button id="randomSubtitle" type="button">鎹竴鍙?/button></div><input id="storySubtitle" type="text" maxlength="28" value="姣忎竴娈垫椂鍏夛紝閮藉湪涓虹敓鍛藉畧鏈?></div>
+        <div class="upload-grid"><div class="control"><label for="oldYear">鐓х墖骞翠唤</label><input id="oldYear" type="text" inputmode="numeric" maxlength="4" value="2016"></div><div class="control"><label for="nowYear">鐓х墖骞翠唤</label><input id="nowYear" type="text" inputmode="numeric" maxlength="4" value="2026"></div></div>
+        <div class="control"><label for="oldZoom">鍗佸勾鍓嶇収鐗囩缉鏀?<span class="slider-value" id="oldZoomValue">110%</span></label><input id="oldZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
+        <div class="control"><label for="nowZoom">鐜板湪鐓х墖缂╂斁 <span class="slider-value" id="nowZoomValue">110%</span></label><input id="nowZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
+        <div class="section-title">鐢婚潰閰嶈壊</div>
+        <div class="theme-switch" role="group" aria-label="鐢婚潰閰嶈壊"><button type="button" class="theme-choice active" data-theme="warm">鏆栨娓╂殩</button><button type="button" class="theme-choice" data-theme="jade">闈掔豢瀹堟姢</button><button type="button" class="theme-choice" data-theme="ink">娣辫摑鏅烘収</button><button type="button" class="theme-choice" data-theme="rose">缁壊鑷存暚</button></div>
+        <div class="buttons"><button id="reset" type="button">鎭㈠榛樿</button><button id="download" class="primary" type="button">涓嬭浇楂樻竻娴锋姤</button></div>
+      </aside>
+      <section class="stage"><div><canvas id="poster" width="1160" height="1920" aria-label="鎴戠殑鍗佸勾娴锋姤棰勮"></canvas><p class="stage-note">鎷栧姩鍥剧墖鍙敼鍙樹綅缃?/p></div></section>
+    </section>
+    <footer class="site-footer"><p>漏 2026 鑻忓窞榧庣鍖荤枟鎶€鏈偂浠芥湁闄愬叕鍙?</p><div><img src="/official-account-qr.jpg" alt="榧庣鍖荤枟寰俊鍏紬鍙蜂簩缁寸爜"><span>鍏虫敞榧庣鍖荤枟鍏紬鍙?/span></div></footer>
+  </main>
+  <script>
+    (() => {
+      const W=1160,H=1920, $=s=>document.querySelector(s), canvas=$('#poster');
+      const posterLogo=new Image(); posterLogo.onload=()=>draw(); posterLogo.src='/dkmedtech-poster-mark.png';
+      const state={old:null,now:null,oldZoom:1.1,nowZoom:1.1,theme:'warm',pos:{old:{x:0,y:0},now:{x:0,y:0}}};
+      const themes={warm:{paper:'#f8f2e7',ink:'#6e4025',muted:'#845238',accent:'#b7794f',soft:'#ead8c3',stream:'rgba(142,94,55,.18)'},jade:{paper:'#eef5f1',ink:'#20564f',muted:'#37746b',accent:'#4e8a7d',soft:'#d7e7df',stream:'rgba(37,107,94,.18)'},ink:{paper:'#eef3f7',ink:'#193e60',muted:'#356a93',accent:'#4c86b5',soft:'#d8e7f2',stream:'rgba(37,87,130,.18)'},rose:{paper:'#fbf0f4',ink:'#722e4d',muted:'#994b6b',accent:'#cb6687',soft:'#f2d9e2',stream:'rgba(142,62,96,.18)'}};
+      const storySubtitles=['姣忎竴娈垫椂鍏夛紝閮藉湪涓虹敓鍛藉畧鏈?,'宀佹湀娴佽浆锛屼粊蹇冨缁堝涓€','涓€璺悜鍓嶏紝鍙负瀹堟姢鐢熷懡','鍖昏矾鏈夊厜锛屾灞ヤ笉鍋?,'鏃堕棿娌夋穩涓撲笟锛屼篃鐝嶈棌鐑埍','鎶婇潚鏄ョ暀缁欏尰璺紝鎶婃俯鏆栫暀缁欐偅鑰?];
+      const randomSubtitle=()=>{const input=$('#storySubtitle');const choices=storySubtitles.filter(item=>item!==input.value);input.value=choices[Math.floor(Math.random()*choices.length)];draw();};
+      ['old','now'].forEach(kind=>{const upload=$('#'+kind+'File').closest('.upload');const zoomControl=$('#'+kind+'Zoom').closest('.control');const zoomLabel=zoomControl.querySelector('label');zoomLabel.childNodes[0].nodeValue='鐓х墖缂╂斁 ';zoomControl.classList.add('photo-zoom-inline');upload.append(zoomControl);const yearControl=$('#'+kind+'Year').closest('.control');yearControl.classList.add('photo-year-inline');upload.append(yearControl);});
+      const frames={old:{x:88,y:725,w:450,h:700,r:-.045},now:{x:608,y:629,w:462,h:756,r:.035}};
+      function path(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+      function fitText(g,text,max,font){ g.font=font; let size=parseInt(font,10); while(g.measureText(text).width>max && size>28){size-=2;g.font=font.replace(/^\d+px/,size+'px');} return g.font; }
+      function cover(g,img,x,y,w,h,zoom,pos,filter){
+        g.save(); path(g,x,y,w,h,3); g.clip();
+        if(img){ const sc=Math.max(w/img.width,h/img.height)*zoom, dw=img.width*sc, dh=img.height*sc; g.filter=filter||'none'; g.drawImage(img,x+(w-dw)/2+(dw-w)*pos.x/2,y+(h-dh)/2+(dh-h)*pos.y/2,dw,dh); g.filter='none'; }
+        else { g.fillStyle='#ead8c3';g.fillRect(x,y,w,h);g.strokeStyle='rgba(124,76,43,.26)';g.lineWidth=2; for(let i=-h;i<w;i+=36){g.beginPath();g.moveTo(x+i,y);g.lineTo(x+i+h,y+h);g.stroke();}g.fillStyle='#a57758';g.font='29px KaiTi,serif';g.textAlign='center';g.fillText('涓婁紶鐓х墖',x+w/2,y+h/2); }
+        g.restore();
       }
-    </style>
-    <script>
-      const refreshBrandImages = () => {
-        document.querySelectorAll("img[src]").forEach((image) => {
-          const source = image.getAttribute("src") || "";
-          if (!/(dkmedtech-logo|official-account-qr)/.test(source) || source.includes("brand-refresh=2")) return;
-          const url = new URL(source, window.location.href);
-          url.searchParams.set("brand-refresh", "2");
-          image.src = url.toString();
-        });
-      };
-      new MutationObserver(refreshBrandImages).observe(document.getElementById("root"), { childList: true, subtree: true });
-      document.addEventListener("click", (event) => {
-        const link = event.target.closest('a[href="/doctor-story.html"]');
-        if (!link) return;
-        event.preventDefault();
-        window.location.assign("./doctor-story.html");
-      });
-    </script>
-  </body>
+      function card(g,key,year,p){
+        const f=frames[key],cx=f.x+f.w/2,cy=f.y+f.h/2;g.save();g.translate(cx,cy);g.rotate(f.r);g.translate(-cx,-cy);
+        g.shadowColor='rgba(79,48,28,.22)';g.shadowBlur=24;g.shadowOffsetY=13;g.fillStyle=key==='old'?p.soft:'#fffdf7';path(g,f.x,f.y,f.w,f.h,24);g.fill();g.shadowColor='transparent';
+        if(key==='old'){g.strokeStyle=p.accent;g.lineWidth=5;path(g,f.x+9,f.y+9,f.w-18,f.h-18,18);g.stroke();}
+        cover(g,state[key],f.x+25,f.y+27,f.w-50,f.h-132,state[key+'Zoom'],state.pos[key],'none');
+        g.strokeStyle=key==='old'?p.accent:'#e7d7c2';g.lineWidth=2;g.strokeRect(f.x+25,f.y+27,f.w-50,f.h-132);
+        g.fillStyle=p.ink;g.font='italic 48px Georgia,serif';g.textAlign='center';g.fillText(year,f.x+f.w/2,f.y+f.h-45);g.restore();
+      }
+      function flourish(g,p){
+        g.save();g.strokeStyle=p.stream;g.lineWidth=2;
+        for(let i=0;i<16;i++){g.beginPath();g.moveTo(625+i*27,-42);g.bezierCurveTo(820+i*8,168,1010,80,1210,205+i*15);g.stroke();}
+        for(let i=0;i<15;i++){g.beginPath();g.moveTo(-45,1475+i*22);g.bezierCurveTo(205,1535+i*5,130,1870-i*10,475,1960);g.stroke();}g.restore();
+      }
+      function timeStream(g,p){
+        g.save();g.strokeStyle=p.stream;g.lineWidth=2;g.setLineDash([11,14]);
+        [0,1,2].forEach(i=>{g.beginPath();g.arc(580,840,420+i*62,Math.PI*.1,Math.PI*.92);g.stroke();});
+        g.setLineDash([]);g.strokeStyle=p.stream;g.lineWidth=1.5;
+        for(let i=0;i<7;i++){g.beginPath();g.moveTo(90,450+i*18);g.bezierCurveTo(350,500-i*16,735,445+i*22,1075,524-i*12);g.stroke();}
+        g.fillStyle=p.muted;g.globalAlpha=.45;g.font='18px Georgia,serif';g.textAlign='center';['PAST','NOW','FORWARD'].forEach((t,i)=>g.fillText(t,258+i*322,490+(i%2)*20));g.restore();
+      }
+      function render(target,scale=1){
+        const p=themes[state.theme],g=target.getContext('2d');g.setTransform(scale,0,0,scale,0,0);g.clearRect(0,0,W,H);g.fillStyle=p.paper;g.fillRect(0,0,W,H);
+        g.fillStyle=p.stream;g.globalAlpha=.55;for(let y=24;y<H;y+=24)for(let x=24;x<W;x+=24){g.beginPath();g.arc(x+(y/24%2?7:0),y,1.05,0,Math.PI*2);g.fill();}g.globalAlpha=1;flourish(g,p);timeStream(g,p);
+        const option=$('#template').value.split('|'),years=Math.max(0,+$('#practiceYears').value||10);const title=option[0].replace('{years}',years),sub=option[1].replace('{years}',years);
+        g.fillStyle=p.muted;g.font='600 22px Arial,sans-serif';g.letterSpacing='3px';g.textAlign='center';g.fillText('CHINESE DOCTORS\' DAY 路 MY MEDICAL JOURNEY',580,178);
+        g.fillStyle=p.ink;fitText(g,title,900,'108px KaiTi,STKaiti,serif');g.fillText(title,580,325);
+        g.fillStyle=p.accent;fitText(g,$('#storySubtitle').value||storySubtitles[0],900,'42px KaiTi,STKaiti,serif');g.fillText($('#storySubtitle').value||storySubtitles[0],580,402);g.textAlign='left';
+        if(posterLogo.complete&&posterLogo.naturalWidth){g.drawImage(posterLogo,1035,24,99,99);}else{g.fillStyle='#f1e1cb';g.beginPath();g.arc(1084.5,73.5,40,0,Math.PI*2);g.fill();g.fillStyle='#9a613d';g.font='bold 16px Arial';g.textAlign='center';g.fillText('DK',1084.5,79.5);g.textAlign='left';}
+        g.strokeStyle=p.accent;g.lineWidth=3;g.beginPath();g.moveTo(580,590);g.lineTo(580,1428);g.stroke();g.fillStyle=p.accent;[590,1428].forEach(y=>{g.beginPath();g.arc(580,y,10,0,Math.PI*2);g.fill();});g.font='bold 28px Georgia,serif';g.textAlign='center';g.fillText($('#oldYear').value||'2016',580,555);g.fillText($('#nowYear').value||'2026',580,1475);g.textAlign='left';
+        card(g,'old',$('#oldYear').value||'2016',p);card(g,'now',$('#nowYear').value||'2026',p);
+        g.strokeStyle=p.accent;g.lineWidth=2;g.beginPath();g.moveTo(88,1552);g.lineTo(1070,1552);g.stroke();g.fillStyle=p.ink;g.font='58px KaiTi,STKaiti,serif';g.textAlign='center';g.fillText('涓嶈礋鏃跺厜锛屼笉璐熶俊浠?,580,1644);
+        g.fillStyle=p.muted;g.font='27px KaiTi,serif';g.fillText('姣忎竴娈靛厜闃达紝閮藉湪瀹堟姢鐢熷懡鐨勮矾涓娿€?,580,1754);g.font='22px Arial,sans-serif';g.fillText('DK MEDTECH 路 鑷存暚涓浗鍖诲笀',580,1794);g.textAlign='left';
+      }
+      function draw(){render(canvas,1);}
+      function load(kind){ const input=$('#'+kind+'File'); input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{state[kind]=img;const thumb=$('#'+kind+'Thumb');thumb.src=url;thumb.hidden=false;$('#'+kind+'Text').hidden=true;draw();};img.src=url;});}
+      load('old');load('now');
+      ['template','oldYear','nowYear','practiceYears','storySubtitle'].forEach(id=>$( '#'+id).addEventListener('input',()=>{ $('#oldYearLabel').textContent=$('#oldYear').value||'2016';$('#nowYearLabel').textContent=$('#nowYear').value||'2026';draw(); }));
+      $('#randomSubtitle').addEventListener('click',randomSubtitle);
+      ['old','now'].forEach(kind=>{$('#'+kind+'Zoom').addEventListener('input',e=>{state[kind+'Zoom']=+e.target.value;$('#'+kind+'ZoomValue').textContent=Math.round(state[kind+'Zoom']*100)+'%';draw();});});
+      document.querySelectorAll('.theme-choice').forEach(button=>button.addEventListener('click',()=>{state.theme=button.dataset.theme;document.querySelectorAll('.theme-choice').forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.style.background=active?themes[state.theme].ink:'';item.style.borderColor=active?themes[state.theme].ink:'';});draw();}));
+      let drag=null;canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),px=(e.clientX-r.left)*W/r.width,py=(e.clientY-r.top)*H/r.height;let hit=Object.keys(frames).find(k=>{const f=frames[k];return px>=f.x&&px<=f.x+f.w&&py>=f.y&&py<=f.y+f.h;});if(!hit)return;drag={kind:hit,x:e.clientX,y:e.clientY,pos:{...state.pos[hit]}};canvas.setPointerCapture(e.pointerId);});
+      canvas.addEventListener('pointermove',e=>{if(!drag)return;const r=canvas.getBoundingClientRect(),dx=(e.clientX-drag.x)*W/r.width,dy=(e.clientY-drag.y)*H/r.height;state.pos[drag.kind]={x:Math.max(-1,Math.min(1,drag.pos.x+dx/180)),y:Math.max(-1,Math.min(1,drag.pos.y+dy/180))};draw();});
+      ['pointerup','pointercancel'].forEach(type=>canvas.addEventListener(type,()=>drag=null));
+      $('#reset').addEventListener('click',()=>{state.old=state.now=null;state.oldZoom=state.nowZoom=1.1;state.pos={old:{x:0,y:0},now:{x:0,y:0}};['old','now'].forEach(k=>{$('#'+k+'File').value='';$('#'+k+'Thumb').hidden=true;$('#'+k+'Text').hidden=false;$('#'+k+'Zoom').value=1.1;$('#'+k+'ZoomValue').textContent='110%';});$('#template').selectedIndex=0;$('#oldYear').value='2016';$('#nowYear').value='2026';$('#practiceYears').value='10';$('#storySubtitle').value=storySubtitles[0];$('#oldYearLabel').textContent='2016';$('#nowYearLabel').textContent='2026';draw();});
+      $('#download').addEventListener('click',()=>{const out=document.createElement('canvas');out.width=2320;out.height=3840;render(out,2);const a=document.createElement('a');a.download='鎴戠殑鍗佸勾-鍖诲笀鑺傛捣鎶?png';a.href=out.toDataURL('image/png');a.click();});
+      $('#reset').addEventListener('click',()=>{state.theme='warm';document.querySelectorAll('.theme-choice').forEach(item=>{item.classList.toggle('active',item.dataset.theme==='warm');item.style.background='';item.style.borderColor='';});draw();});
+      randomSubtitle();
+    })();
+  </script>
+</body>
 </html>
+
+
