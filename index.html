@@ -10,5 +10,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      document.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href="/doctor-story.html"]');
+        if (!link) return;
+        event.preventDefault();
+        window.location.assign("./doctor-story.html");
+      });
+    </script>
   </body>
 </html>
