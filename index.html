@@ -67,47 +67,47 @@
 </head>
 <body>
   <main class="page">
-    <header class="site-header"><p>绗節涓腑鍥藉尰甯堣妭 路 鑷存暚姣忎竴浣嶄腑鍥藉尰甯?/p><a class="site-logo" href="https://www.dkmedtech.com/" target="_blank" rel="noreferrer" aria-label="榧庣鍖荤枟瀹樼綉"><img src="./dkmedtech-logo.png" alt="榧庣鍖荤枟 DK MEDTECH"></a></header>
-    <nav class="tabs" aria-label="娴锋姤绫诲瀷"><b>鎴戞槸鍖荤敓</b><a href="./">鐚粰鍖荤敓</a></nav>
-    <header class="hero"><p>CHINESE DOCTORS' DAY 路 MY MEDICAL JOURNEY</p><h1>鎴戠殑鍖昏矾 路 鍖昏矾濡傚垵</h1><p class="hero-description">涓婁紶杩囧線涓庣幇鍦ㄧ殑鐓х墖锛岃嚜瀹氫箟涓ゅ紶鐓х墖鐨勫勾浠斤紱鍙垎鍒嫋鍔ㄧ収鐗囦綅缃垨璋冩暣缂╂斁锛岀敓鎴愬浐瀹氭瘮渚嬬殑绾康娴锋姤銆?/p></header>
+    <header class="site-header"><p>第九个中国医师节 · 致敬每一位中国医师</p><a class="site-logo" href="https://www.dkmedtech.com/" target="_blank" rel="noreferrer" aria-label="鼎科医疗官网"><img src="./dkmedtech-logo.png" alt="鼎科医疗 DK MEDTECH"></a></header>
+    <nav class="tabs" aria-label="海报类型"><b>我是医生</b><a href="./">献给医生</a></nav>
+    <header class="hero"><p>CHINESE DOCTORS' DAY · MY MEDICAL JOURNEY</p><h1>我的医路 · 医路如初</h1><p class="hero-description">上传过往与现在的照片，自定义两张照片的年份；可分别拖动照片位置或调整缩放，生成固定比例的纪念海报。</p></header>
     <section class="workspace">
       <aside class="panel">
-        <div class="section-title">涓ゆ鏃跺厜</div>
+        <div class="section-title">两段时光</div>
         <div class="upload-grid">
-          <label class="upload"><span class="upload-label"><span>杩囧線</span><span id="oldYearLabel">2016</span></span><span class="upload-box"><input id="oldFile" type="file" accept="image/*" hidden><span id="oldText">锛?br>涓婁紶杩囧線鐓х墖</span><img id="oldThumb" hidden alt="杩囧線鐓х墖棰勮"></span></label>
-          <label class="upload"><span class="upload-label"><span>鐜板湪</span><span id="nowYearLabel">2026</span></span><span class="upload-box"><input id="nowFile" type="file" accept="image/*" hidden><span id="nowText">锛?br>涓婁紶鐜板湪鐓х墖</span><img id="nowThumb" hidden alt="鐜板湪鐓х墖棰勮"></span></label>
+          <label class="upload"><span class="upload-label"><span>过往</span><span id="oldYearLabel">2016</span></span><span class="upload-box"><input id="oldFile" type="file" accept="image/*" hidden><span id="oldText"><br>上传过往照片</span><img id="oldThumb" hidden alt="过往照片预览"></span></label>
+          <label class="upload"><span class="upload-label"><span>现在</span><span id="nowYearLabel">2026</span></span><span class="upload-box"><input id="nowFile" type="file" accept="image/*" hidden><span id="nowText"><br>上传现在照片</span><img id="nowThumb" hidden alt="现在照片预览"></span></label>
         </div>
-        <div class="section-title">鏂囧瓧涓庡勾浠?/div>
-        <div class="control"><label for="template">涓婚鏂囨</label><select id="template"><option value="鎴戠殑鍖昏矾|">鎴戠殑鍖昏矾</option><option value="{years}骞村尰璺紝鍚戝厜鑰岃|">__骞村尰璺紝鍚戝厜鑰岃</option><option value="鎵у尰{years}骞达紝鐑埍涓嶅噺|">鎵у尰__骞达紝鐑埍涓嶅噺</option><option value="琛屽尰{years}骞达紝涓嶈礋鐑埍|">琛屽尰__骞达紝涓嶈礋鐑埍</option><option value="鎵х伅琛屽尰锛屽瞾宀佺粡骞磡">鎵х伅琛屽尰锛屽瞾宀佺粡骞?/option></select></div>
-        <div class="control"><label for="practiceYears">浠庡尰骞撮檺锛堝勾锛?/label><input id="practiceYears" type="text" inputmode="numeric" maxlength="2" value="10"></div>
-        <div class="control"><div class="subtitle-label"><label for="storySubtitle">鍓爣棰?/label><button id="randomSubtitle" type="button">鎹竴鍙?/button></div><input id="storySubtitle" type="text" maxlength="28" value="姣忎竴娈垫椂鍏夛紝閮藉湪涓虹敓鍛藉畧鏈?></div>
-        <div class="upload-grid"><div class="control"><label for="oldYear">鐓х墖骞翠唤</label><input id="oldYear" type="text" inputmode="numeric" maxlength="4" value="2016"></div><div class="control"><label for="nowYear">鐓х墖骞翠唤</label><input id="nowYear" type="text" inputmode="numeric" maxlength="4" value="2026"></div></div>
-        <div class="control"><label for="oldZoom">鍗佸勾鍓嶇収鐗囩缉鏀?<span class="slider-value" id="oldZoomValue">110%</span></label><input id="oldZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
-        <div class="control"><label for="nowZoom">鐜板湪鐓х墖缂╂斁 <span class="slider-value" id="nowZoomValue">110%</span></label><input id="nowZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
-        <div class="section-title">鐢婚潰閰嶈壊</div>
-        <div class="theme-switch" role="group" aria-label="鐢婚潰閰嶈壊"><button type="button" class="theme-choice active" data-theme="warm">鏆栨娓╂殩</button><button type="button" class="theme-choice" data-theme="jade">闈掔豢瀹堟姢</button><button type="button" class="theme-choice" data-theme="ink">娣辫摑鏅烘収</button><button type="button" class="theme-choice" data-theme="rose">缁壊鑷存暚</button></div>
-        <div class="buttons"><button id="reset" type="button">鎭㈠榛樿</button><button id="download" class="primary" type="button">涓嬭浇楂樻竻娴锋姤</button></div>
+        <div class="section-title">文字与年份</div>
+        <div class="control"><label for="template">主题文案</label><select id="template"><option value="我的医路|">我的医路</option><option value="{years}年医路，向光而行|">__年医路，向光而行</option><option value="执医{years}年，热爱不减|">执医__年，热爱不减</option><option value="行医{years}年，不负热爱|">行医__年，不负热爱</option><option value="执灯行医，岁岁经年|">执灯行医，岁岁经年</option></select></div>
+        <div class="control"><label for="practiceYears">从医年限（年）</label><input id="practiceYears" type="text" inputmode="numeric" maxlength="2" value="10"></div>
+        <div class="control"><div class="subtitle-label"><label for="storySubtitle">副标题</label><button id="randomSubtitle" type="button">换一句</button></div><input id="storySubtitle" type="text" maxlength="28" value="每一段时光，都在为生命守护。</div>
+        <div class="upload-grid"><div class="control"><label for="oldYear">照片年份</label><input id="oldYear" type="text" inputmode="numeric" maxlength="4" value="2016"></div><div class="control"><label for="nowYear">照片年份</label><input id="nowYear" type="text" inputmode="numeric" maxlength="4" value="2026"></div></div>
+        <div class="control"><label for="oldZoom">十年前照片缩放<span class="slider-value" id="oldZoomValue">110%</span></label><input id="oldZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
+        <div class="control"><label for="nowZoom">现在照片缩放 <span class="slider-value" id="nowZoomValue">110%</span></label><input id="nowZoom" type="range" min="1" max="2" step=".01" value="1.1"></div>
+        <div class="section-title">画面配色</div>
+        <div class="theme-switch" role="group" aria-label="画面配色"><button type="button" class="theme-choice active" data-theme="warm">暖棕温暖</button><button type="button" class="theme-choice" data-theme="jade">青绿守护</button><button type="button" class="theme-choice" data-theme="ink">深蓝智慧</button><button type="button" class="theme-choice" data-theme="rose">绯色致敬</button></div>
+        <div class="buttons"><button id="reset" type="button">恢复默认</button><button id="download" class="primary" type="button">下载高清海报</button></div>
       </aside>
-      <section class="stage"><div><canvas id="poster" width="1160" height="1920" aria-label="鎴戠殑鍗佸勾娴锋姤棰勮"></canvas><p class="stage-note">鎷栧姩鍥剧墖鍙敼鍙樹綅缃?/p></div></section>
+      <section class="stage"><div><canvas id="poster" width="1160" height="1920" aria-label="我的十年海报预览"></canvas><p class="stage-note">拖动图片可改变位置。</p></div></section>
     </section>
-    <footer class="site-footer"><p>漏 2026 鑻忓窞榧庣鍖荤枟鎶€鏈偂浠芥湁闄愬叕鍙?</p><div><img src="/official-account-qr.jpg" alt="榧庣鍖荤枟寰俊鍏紬鍙蜂簩缁寸爜"><span>鍏虫敞榧庣鍖荤枟鍏紬鍙?/span></div></footer>
+    <footer class="site-footer"><p>© 2026 苏州鼎科医疗技术股份有限公司</p><div><img src="./official-account-qr.jpg" alt="鼎科医疗微信公众号二维码"><span>关注鼎科医疗公众号</span></div></footer>
   </main>
   <script>
     (() => {
       const W=1160,H=1920, $=s=>document.querySelector(s), canvas=$('#poster');
-      const posterLogo=new Image(); posterLogo.onload=()=>draw(); posterLogo.src='/dkmedtech-poster-mark.png';
+      const posterLogo=new Image(); posterLogo.onload=()=>draw(); posterLogo.src='./dkmedtech-poster-mark.png';
       const state={old:null,now:null,oldZoom:1.1,nowZoom:1.1,theme:'warm',pos:{old:{x:0,y:0},now:{x:0,y:0}}};
       const themes={warm:{paper:'#f8f2e7',ink:'#6e4025',muted:'#845238',accent:'#b7794f',soft:'#ead8c3',stream:'rgba(142,94,55,.18)'},jade:{paper:'#eef5f1',ink:'#20564f',muted:'#37746b',accent:'#4e8a7d',soft:'#d7e7df',stream:'rgba(37,107,94,.18)'},ink:{paper:'#eef3f7',ink:'#193e60',muted:'#356a93',accent:'#4c86b5',soft:'#d8e7f2',stream:'rgba(37,87,130,.18)'},rose:{paper:'#fbf0f4',ink:'#722e4d',muted:'#994b6b',accent:'#cb6687',soft:'#f2d9e2',stream:'rgba(142,62,96,.18)'}};
-      const storySubtitles=['姣忎竴娈垫椂鍏夛紝閮藉湪涓虹敓鍛藉畧鏈?,'宀佹湀娴佽浆锛屼粊蹇冨缁堝涓€','涓€璺悜鍓嶏紝鍙负瀹堟姢鐢熷懡','鍖昏矾鏈夊厜锛屾灞ヤ笉鍋?,'鏃堕棿娌夋穩涓撲笟锛屼篃鐝嶈棌鐑埍','鎶婇潚鏄ョ暀缁欏尰璺紝鎶婃俯鏆栫暀缁欐偅鑰?];
+      const storySubtitles=['每一段时光，都在为生命守护','岁月流转，仁心始终如一','一路向前，只为守护生命','医路有光，步履不停','时间沉淀专业，也珍藏热爱','把青春留给医路，把温暖留给患者'];
       const randomSubtitle=()=>{const input=$('#storySubtitle');const choices=storySubtitles.filter(item=>item!==input.value);input.value=choices[Math.floor(Math.random()*choices.length)];draw();};
-      ['old','now'].forEach(kind=>{const upload=$('#'+kind+'File').closest('.upload');const zoomControl=$('#'+kind+'Zoom').closest('.control');const zoomLabel=zoomControl.querySelector('label');zoomLabel.childNodes[0].nodeValue='鐓х墖缂╂斁 ';zoomControl.classList.add('photo-zoom-inline');upload.append(zoomControl);const yearControl=$('#'+kind+'Year').closest('.control');yearControl.classList.add('photo-year-inline');upload.append(yearControl);});
+      ['old','now'].forEach(kind=>{const upload=$('#'+kind+'File').closest('.upload');const zoomControl=$('#'+kind+'Zoom').closest('.control');const zoomLabel=zoomControl.querySelector('label');zoomLabel.childNodes[0].nodeValue='照片缩放 ';zoomControl.classList.add('photo-zoom-inline');upload.append(zoomControl);const yearControl=$('#'+kind+'Year').closest('.control');yearControl.classList.add('photo-year-inline');upload.append(yearControl);});
       const frames={old:{x:88,y:725,w:450,h:700,r:-.045},now:{x:608,y:629,w:462,h:756,r:.035}};
       function path(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
       function fitText(g,text,max,font){ g.font=font; let size=parseInt(font,10); while(g.measureText(text).width>max && size>28){size-=2;g.font=font.replace(/^\d+px/,size+'px');} return g.font; }
       function cover(g,img,x,y,w,h,zoom,pos,filter){
         g.save(); path(g,x,y,w,h,3); g.clip();
         if(img){ const sc=Math.max(w/img.width,h/img.height)*zoom, dw=img.width*sc, dh=img.height*sc; g.filter=filter||'none'; g.drawImage(img,x+(w-dw)/2+(dw-w)*pos.x/2,y+(h-dh)/2+(dh-h)*pos.y/2,dw,dh); g.filter='none'; }
-        else { g.fillStyle='#ead8c3';g.fillRect(x,y,w,h);g.strokeStyle='rgba(124,76,43,.26)';g.lineWidth=2; for(let i=-h;i<w;i+=36){g.beginPath();g.moveTo(x+i,y);g.lineTo(x+i+h,y+h);g.stroke();}g.fillStyle='#a57758';g.font='29px KaiTi,serif';g.textAlign='center';g.fillText('涓婁紶鐓х墖',x+w/2,y+h/2); }
+        else { g.fillStyle='#ead8c3';g.fillRect(x,y,w,h);g.strokeStyle='rgba(124,76,43,.26)';g.lineWidth=2; for(let i=-h;i<w;i+=36){g.beginPath();g.moveTo(x+i,y);g.lineTo(x+i+h,y+h);g.stroke();}g.fillStyle='#a57758';g.font='29px KaiTi,serif';g.textAlign='center';g.fillText('上传照片',x+w/2,y+h/2); }
         g.restore();
       }
       function card(g,key,year,p){
@@ -134,14 +134,14 @@
         const p=themes[state.theme],g=target.getContext('2d');g.setTransform(scale,0,0,scale,0,0);g.clearRect(0,0,W,H);g.fillStyle=p.paper;g.fillRect(0,0,W,H);
         g.fillStyle=p.stream;g.globalAlpha=.55;for(let y=24;y<H;y+=24)for(let x=24;x<W;x+=24){g.beginPath();g.arc(x+(y/24%2?7:0),y,1.05,0,Math.PI*2);g.fill();}g.globalAlpha=1;flourish(g,p);timeStream(g,p);
         const option=$('#template').value.split('|'),years=Math.max(0,+$('#practiceYears').value||10);const title=option[0].replace('{years}',years),sub=option[1].replace('{years}',years);
-        g.fillStyle=p.muted;g.font='600 22px Arial,sans-serif';g.letterSpacing='3px';g.textAlign='center';g.fillText('CHINESE DOCTORS\' DAY 路 MY MEDICAL JOURNEY',580,178);
+        g.fillStyle=p.muted;g.font='600 22px Arial,sans-serif';g.letterSpacing='3px';g.textAlign='center';g.fillText('CHINESE DOCTORS\' DAY · MY MEDICAL JOURNEY',580,178);
         g.fillStyle=p.ink;fitText(g,title,900,'108px KaiTi,STKaiti,serif');g.fillText(title,580,325);
         g.fillStyle=p.accent;fitText(g,$('#storySubtitle').value||storySubtitles[0],900,'42px KaiTi,STKaiti,serif');g.fillText($('#storySubtitle').value||storySubtitles[0],580,402);g.textAlign='left';
         if(posterLogo.complete&&posterLogo.naturalWidth){g.drawImage(posterLogo,1035,24,99,99);}else{g.fillStyle='#f1e1cb';g.beginPath();g.arc(1084.5,73.5,40,0,Math.PI*2);g.fill();g.fillStyle='#9a613d';g.font='bold 16px Arial';g.textAlign='center';g.fillText('DK',1084.5,79.5);g.textAlign='left';}
         g.strokeStyle=p.accent;g.lineWidth=3;g.beginPath();g.moveTo(580,590);g.lineTo(580,1428);g.stroke();g.fillStyle=p.accent;[590,1428].forEach(y=>{g.beginPath();g.arc(580,y,10,0,Math.PI*2);g.fill();});g.font='bold 28px Georgia,serif';g.textAlign='center';g.fillText($('#oldYear').value||'2016',580,555);g.fillText($('#nowYear').value||'2026',580,1475);g.textAlign='left';
         card(g,'old',$('#oldYear').value||'2016',p);card(g,'now',$('#nowYear').value||'2026',p);
-        g.strokeStyle=p.accent;g.lineWidth=2;g.beginPath();g.moveTo(88,1552);g.lineTo(1070,1552);g.stroke();g.fillStyle=p.ink;g.font='58px KaiTi,STKaiti,serif';g.textAlign='center';g.fillText('涓嶈礋鏃跺厜锛屼笉璐熶俊浠?,580,1644);
-        g.fillStyle=p.muted;g.font='27px KaiTi,serif';g.fillText('姣忎竴娈靛厜闃达紝閮藉湪瀹堟姢鐢熷懡鐨勮矾涓娿€?,580,1754);g.font='22px Arial,sans-serif';g.fillText('DK MEDTECH 路 鑷存暚涓浗鍖诲笀',580,1794);g.textAlign='left';
+        g.strokeStyle=p.accent;g.lineWidth=2;g.beginPath();g.moveTo(88,1552);g.lineTo(1070,1552);g.stroke();g.fillStyle=p.ink;g.font='58px KaiTi,STKaiti,serif';g.textAlign='center';g.fillText('不负时光，不负信念',580,1644);
+        g.fillStyle=p.muted;g.font='27px KaiTi,serif';g.fillText('每一段光阴，都在守护生命的路上。',580,1754);g.font='22px Arial,sans-serif';g.fillText('DK MEDTECH · 致敬中国医师',580,1794);g.textAlign='left';
       }
       function draw(){render(canvas,1);}
       function load(kind){ const input=$('#'+kind+'File'); input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const url=URL.createObjectURL(f),img=new Image();img.onload=()=>{state[kind]=img;const thumb=$('#'+kind+'Thumb');thumb.src=url;thumb.hidden=false;$('#'+kind+'Text').hidden=true;draw();};img.src=url;});}
@@ -154,12 +154,11 @@
       canvas.addEventListener('pointermove',e=>{if(!drag)return;const r=canvas.getBoundingClientRect(),dx=(e.clientX-drag.x)*W/r.width,dy=(e.clientY-drag.y)*H/r.height;state.pos[drag.kind]={x:Math.max(-1,Math.min(1,drag.pos.x+dx/180)),y:Math.max(-1,Math.min(1,drag.pos.y+dy/180))};draw();});
       ['pointerup','pointercancel'].forEach(type=>canvas.addEventListener(type,()=>drag=null));
       $('#reset').addEventListener('click',()=>{state.old=state.now=null;state.oldZoom=state.nowZoom=1.1;state.pos={old:{x:0,y:0},now:{x:0,y:0}};['old','now'].forEach(k=>{$('#'+k+'File').value='';$('#'+k+'Thumb').hidden=true;$('#'+k+'Text').hidden=false;$('#'+k+'Zoom').value=1.1;$('#'+k+'ZoomValue').textContent='110%';});$('#template').selectedIndex=0;$('#oldYear').value='2016';$('#nowYear').value='2026';$('#practiceYears').value='10';$('#storySubtitle').value=storySubtitles[0];$('#oldYearLabel').textContent='2016';$('#nowYearLabel').textContent='2026';draw();});
-      $('#download').addEventListener('click',()=>{const out=document.createElement('canvas');out.width=2320;out.height=3840;render(out,2);const a=document.createElement('a');a.download='鎴戠殑鍗佸勾-鍖诲笀鑺傛捣鎶?png';a.href=out.toDataURL('image/png');a.click();});
+      $('#download').addEventListener('click',()=>{const out=document.createElement('canvas');out.width=2320;out.height=3840;render(out,2);const a=document.createElement('a');a.download='我的十年-医师节海报.png';a.href=out.toDataURL('image/png');a.click();});
       $('#reset').addEventListener('click',()=>{state.theme='warm';document.querySelectorAll('.theme-choice').forEach(item=>{item.classList.toggle('active',item.dataset.theme==='warm');item.style.background='';item.style.borderColor='';});draw();});
       randomSubtitle();
     })();
   </script>
 </body>
 </html>
-
 
